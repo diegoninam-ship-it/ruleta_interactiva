@@ -44,7 +44,7 @@ export function useArduinoSerial(): UseArduinoSerialResult {
     async (port: SerialPort) => {
       keepReadingRef.current = true;
       const decoder = new TextDecoderStream();
-      const cierrePromesa = port.readable!.pipeTo(decoder.writable);
+      const cierrePromesa = port.readable!.pipeTo(decoder.writable as WritableStream<Uint8Array>);
       const reader = decoder.readable.getReader();
       readerRef.current = reader;
 
